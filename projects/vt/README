@@ -2,15 +2,29 @@ The VirusTotal Dataset and Analysis Scripts for USENIX Security 2020 Artifact Ev
 ----------------------------------------------------------------------------------------
 
 *********************************************************************************************
-*Version: 1.0
+*Version: 1.1
 *Author:  Shuofei Zhu, Jianjun Shi, Limin Yang, Boqin Qin, Ziyi Zhang, Linhai Song, Gang Wang
-*Update:  Feb 7, 2020
+*Update:  Feb 27, 2020
 *Paper:   Measuring and Modeling the Label Dynamics of Online Anti-Malware Engines
 *********************************************************************************************
 
 This document is to help users make use of the dataset we collected and reproduce the 
-measurement we conducted. It contains the following descriptions:
+measurement we conducted. 
 
+A quick guide to run the artifact:
+1. Download the artifact and decompress it with tools supporting .7z files.
+2. Open the virtual machine with Virtual Box (version later than 6.0.14 recommended).
+3. The password is `user`.
+4. You can find a directory containing the artifact. 
+5. For example, to run 
+`/home/user/Desktop/virustotal/section-3-3/count_measure_points.py`,
+user can run the following commands:
+```
+cd /home/user/Desktop/virustotal/section-3-3
+python3 count_measure_points.py
+```
+
+The detailed descriptions are as follows:
 
 
 0. Artifact Expectation
@@ -34,7 +48,9 @@ Since the raw data is too large, we release it using a separate link.
 To facilitate the reproduction of our measurements, we preprocess the data
  firstly and release the preprocessed data together with the scripts in a 
 virtual machine. All required libraries are already installed in the 
-virtual machine. The user name and password are both 'user' on the virtual machine.
+virtual machine. 
+
+**The user name and password are both 'user' on the virtual machine.**
 
 The scripts to collect data from VirusTotal are not released.
 
@@ -81,22 +97,34 @@ stored in the corresponding subdirectories respectively, following a similar for
 main dataset. Besides, there are also files stored directly under `ground-truth-dataset`. 
 Each file contains all the samples in all ground truth datasets.
 
-Next, we explain the directories according to each section in the paper. All Python scripts
-are in Python 3 unless specified. In other words, all scripts should be run with 
-a command like `python3 script.py`.
+Next, we explain the directories according to each section in the paper. 
+
+**How to run the commands in each directory:**
+All Python scripts are in Python 3 unless specified. In other words, all scripts should be 
+run with a command like `python3 script.py`. For each script, the working directory is the 
+directory that directly contains the script. Therefore, to run a script in 
+`section-a-b/foo.py`,
+users should run the following command in terminal:
+```
+cd section-a-b
+python3 foo.py
+```
 
 
 Section 2:
-We put the summaries of the papers in section-2.xlsx.
+
+We put the summaries of the papers in section-2.xlsx. We also put a link to this file on the
+final version of the paper.
+
 
 Section 3.2:
 Each file contains the PE samples of the ground truth datasets. Please be careful when 
-inspecting the malicious samples.
+inspecting the malicious samples. 
 
 Section 3.3:
 The total number of measurements is computed on raw json data.
 The scripts to compute the last two numbers are `section-3-3/count_measure_points_main.py` 
-and `section-3-3/count_measure_points_main.py`.
+and `section-3-3/count_measure_points.py`.
 
 Section 4.1:
 Compute the numbers: `section-4-1/flip_count.py`
@@ -187,13 +215,12 @@ virtual machine.
 We can open the following two files with gephi installed:
 `section-5-2/figure-19-and-figure-20/artifact-gephi/artifact/gephi/active-influence-01-flip.gephi` for Figure 19, 
 and `section-5-2/figure-19-and-figure-20/artifact-gephi/artifact/gephi/active-influence-10-flip.gephi` for Figure 20.
-Figure 21 and Figure 22:
-`section-5-2/figure-19-and-figure-20/calc-0-to-1.py` and 
-`section-5-2/figure-19-and-figure-20/calc-0-to-1.py`
+Figure 21 and Figure 22 are removed in the final version paper.
 
 Compute the influence results:
-Use Python 2 to run: `python section-5-2/influence_active.py` and 
-`python section-5-2/influence_passive.py`.
+Use Python 2 to run: `cd section-5-2;python influence_active.py` and 
+`cd section-5-2;python influence_passive.py`.
+(These two scripts used some Python 2 features that made them hard to migrate to Python 3.)
 
 Section 6.1:
 Figure 12:
@@ -229,4 +256,3 @@ Hazard vs non-hazard:
 Count flip reasons:
 `section-6-4/count_flip_reasons.py`
 (The results are interpreted in the same way as Section 4.3.)
-
