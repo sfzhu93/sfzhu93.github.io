@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Modulo Calculator</title>
+  </head>
+  <body>
+<h1>Modulo Calculator</h1>
+<div>
+<input type="text" id="num-one"> mod <input type="text" id="num-two"> 
+<button onclick="compute_mod()">=</button>
+<span id="mod-result"> .. </span>
+</div>
+<h1>Inverse Modulo Calculator</h1>
+<div>
+<input type="text" id="txt_x"> * 
+<span id="inv-mod-result"> ? </span>= 1 mod <input type="text" id="txt_y"> </div>
+<button onclick="compute_inv_mod()">Compute</button>
+</body>
+<script>
+var numOne = document.getElementById('num-one');
+var numTwo = document.getElementById('num-two');
+var mod_res = document.getElementById('mod-result');
+var x = document.getElementById('txt_x');
+var y = document.getElementById('txt_y');
+var inv_mod = document.getElementById('inv-mod-result');
+function compute_mod() {
+  var one = parseInt(numOne.value) || 0;
+  var two = parseInt(numTwo.value) || 0;
+  mod_res.innerText = one%two;
+}
+
+function xgcd(a, b) {
+
+if (b == 0) {
+  return [1, 0, a];
+}
+
+temp = xgcd(b, a % b);
+x = temp[0];
+y = temp[1];
+d = temp[2];
+return [y, x-y*Math.floor(a/b), d];
+}
+
+function naive_inv_mod(a, b) {
+  for(var i=1;i<=b;++i) {
+    if ((a*i) %b == 1 ){
+      return i;
+    } 
+  }
+}
+
+function compute_inv_mod() {
+  var one = parseInt(x.value) || 0;
+  var two = parseInt(y.value) || 0;
+  //t = xgcd(one, two);
+  //console.log(t);
+  //inv_mod.innerText = t[2];
+  inv_mod.innerText = naive_inv_mod(one, two);
+}
+
+</script>
+</html>
